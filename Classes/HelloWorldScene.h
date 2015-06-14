@@ -24,6 +24,7 @@ public:
 
 	void play(Object* pSender, TouchEventType type);
 	void help(Object* pSender, TouchEventType type);
+	void exit(Object* pSender, TouchEventType type);
 };
 
 #endif // __HELLOWORLD_SCENE_H__

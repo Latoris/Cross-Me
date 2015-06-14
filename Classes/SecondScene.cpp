@@ -40,7 +40,7 @@ bool SecondScene::init(){
 
 void SecondScene::initmap(){
 	//判断是否存在FirstExit值，不存在则进行第一次的地图初始化
-	/*if (!UserDefault::getInstance()->getBoolForKey("FirstExit")){
+	if (UserDefault::getInstance()->getBoolForKey("FirstExit")==true){
 		for (int i = 0; i < 10; i++){
 			for (int j = 0; j < 10; j++){
 				String* inputs= String::createWithFormat("input_%d_%d", i, j);
@@ -52,21 +52,9 @@ void SecondScene::initmap(){
 		UserDefault::getInstance()->flush();//将FirstExit值改为false
 	}
 	
-	//判断是否是返回该场景
-	if (UserDefault::getInstance()->getBoolForKey("Return")){
-	
-		return;//返回不重新进行初始化
-	}
-
 	//判断是否在退出游戏后重新进入
-	if (UserDefault::getInstance()->getBoolForKey("Return")){
+	if (UserDefault::getInstance()->getBoolForKey("Exit")==true){
 		load();
-	}
-	*/
-	for (int i = 0; i < 10; i++){
-		for (int j = 0; j < 10; j++){
-			input[i][j] = 0;
-		}
 	}
 	map[3][9] = map[4][9] = map[2][8] = map[4][8] = 1;
 	map[1][7] = map[2][7] = map[3][7] = map[0][6] = map[2][6] = map[3][6] = 1;
@@ -164,13 +152,12 @@ void SecondScene::BackToMainScene(Object* pSender, TouchEventType type){
 	switch (type){
 	case TOUCH_EVENT_BEGAN:
 		UserDefault::getInstance()->setBoolForKey("Return", true);
-		/*for (int i = 0; i < 10; i++){
+		for (int i = 0; i < 10; i++){
 			for (int j = 0; j < 10; j++){
 				String* getinput = String::createWithFormat("input_%d_%d", i, j);
-				UserDefault::getInstance()->setIntegerForKey("input_%d_%d", input[i][j]);
+				UserDefault::getInstance()->setIntegerForKey(getinput->getCString(), input[i][j]);
 			}
 		}
-		*/
 		UserDefault::getInstance()->flush();
 		
 		Director::getInstance()->pushScene(HelloWorld::createScene());
@@ -184,7 +171,7 @@ void SecondScene::load(){
 	for (int i = 0; i < 10; i++){
 		for (int j = 0; j < 10; j++){
 			String* getinput = String::createWithFormat("input_%d_%d", i, j);
-			input[i][j] = UserDefault::getInstance()->getIntegerForKey("input_%d_%d");
+			input[i][j] = UserDefault::getInstance()->getIntegerForKey(getinput->getCString());
 		}
 	}
 	Rect rect(0, 0, 26, 26);

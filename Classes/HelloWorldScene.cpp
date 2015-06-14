@@ -37,6 +37,7 @@ bool HelloWorld::init()
 	playbutton->addTouchEventListener(this, toucheventselector(HelloWorld::play));
 	Button * helpbutton = (Button*)nodemain->getChildByName("Help");
 	helpbutton->addTouchEventListener(this, toucheventselector(HelloWorld::help));
+
 	return true;
 }
 
@@ -58,6 +59,14 @@ void HelloWorld::help(Object* pSender, TouchEventType type){
 	switch (type){
 	case TOUCH_EVENT_BEGAN:
 		Director::getInstance()->replaceScene(HelpScene::creatScene());
+		break;
+	}
+}
+
+void HelloWorld::exit(Object* pSender, TouchEventType type){
+	switch (type){
+	case TOUCH_EVENT_BEGAN:
+		
 		break;
 	}
 }
