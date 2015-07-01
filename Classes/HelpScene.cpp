@@ -1,6 +1,7 @@
 #include "HelpScene.h"
 #include "HelloWorldScene.h"
-Scene* HelpScene::creatScene(){
+
+Scene* HelpScene::createScene(){
 	Scene* scene = Scene::create();
 	HelpScene *layer = HelpScene::create();
 	scene->addChild(layer);
